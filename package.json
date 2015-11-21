@@ -1,0 +1,20 @@
+{
+  "name": "mana-result",
+  "version": "0.0.0",
+  "description": "render a result with automatic update on state change",
+  "keywords": ["result","mana","promise","future","ui"],
+  "dependencies": {},
+  "devDependencies": {
+    "result": "jkroso/result",
+    "serve": "jkroso/serve",
+    "hydro-html": "*",
+    "hydro-bdd": "*",
+    "hydro-dot": "*",
+    "hydro": "*"
+  },
+  "transpile": [["*.js", "!sourcegraph/babel->js", {"stage": 0}]],
+  "repository": "git://github.com/jkroso/mana-result.git",
+  "author": "Jake Rosoman",
+  "files": ["index.js"],
+  "license": "MIT"
+}
