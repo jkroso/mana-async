@@ -1,17 +1,22 @@
 # mana-result
 
-handles the rendering of future values in all 3 possible states
+It provides branching on result state and automatically transitions between states. The 3 possible states are:
+
+  - `done`
+  - `fail`
+  - `pending`
 
 ## Installation
 
-`npm install jkroso/mana-result`
+`npm install mana-result`
 
 then in your app:
 
 ```js
-var mana-result = require('mana-result')
+import Result from 'mana-result'
+
+<Result promise={http`/api/dump`}
+        pending={() => new Spinner}
+        done={({params}) => <pre>{JSON.stringify(params.promise.value)}</pre>}
+        fail={() => <span>error</span>}/>
 ```
-
-## API
-
-### `mana-result()`
