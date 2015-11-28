@@ -36,9 +36,9 @@
       }, 3e3)
 
       const app = new App(wrap(count), cursor => {
-        const pending = ({previousNode}) => <div class="loading">{previousNode || 'pending'}</div>
-        const done = ({params}) => <span class="done">{params.promise.value}</span>
-        const fail = ({params}) => <span class="error">{params.promise.value}</span>
+        const pending = self => <div class="loading">{self.previousNode || 'pending'}</div>
+        const done = value => <span class="done">{value}</span>
+        const fail = value => <span class="error">{value}</span>
         return <State promise={cursor.value} pending done fail/>
       })
 

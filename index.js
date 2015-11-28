@@ -18,6 +18,6 @@ export default class State extends Component {
   render(params) {
     const fn = params[this.state]
     assert(typeof fn == 'function')
-    return fn(this)
+    return fn(this.state != 'pending' ? params.promise.value : this)
   }
 }
