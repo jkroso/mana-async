@@ -5,11 +5,11 @@
   "keywords": ["result","mana","promise","future","ui"],
   "dependencies": {},
   "devDependencies": {
-    "result": "jkroso/result",
     "serve": "jkroso/serve",
     "hydro-html": "*",
     "hydro-bdd": "*",
     "hydro-dot": "*",
+    "result": "2",
     "hydro": "*"
   },
   "transpile": [["*.js", "!sourcegraph/babel->js", {"stage": 0}]],

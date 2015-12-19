@@ -1,4 +1,4 @@
-import {Component,STATE} from 'mana'
+import {Component,STATE,JSX} from 'mana'
 import assert from 'assert'
 
 export default class State extends Component {
@@ -16,8 +16,19 @@ export default class State extends Component {
     return super.update(next, dom)
   }
   render(params) {
-    const fn = params[this.state]
+    const fn = params[this.state] || defaults[this.state]
     assert(typeof fn == 'function')
     return fn(this.state != 'pending' ? params.promise.value : this)
+  }
+}
+
+const defaults = {
+  fail(error) {
+    return error instanceof Error
+      ? <span class="error-message">{error.message}</span>
+      : <span class="error-symbol">∅</span>
+  },
+  pending(self) {
+    return self.previousNode
   }
 }
