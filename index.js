@@ -2,7 +2,7 @@ import {Component,STATE,JSX} from 'mana'
 import {coerce} from 'result'
 import assert from 'assert'
 
-export default class State extends Component {
+export default class Async extends Component {
   constructor(params, children) {
     params.promise = coerce(params.promise)
     super(params, children)

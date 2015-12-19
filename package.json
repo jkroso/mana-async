@@ -1,5 +1,5 @@
 {
-  "name": "mana-result",
+  "name": "mana-async",
   "version": "0.0.0",
   "description": "render a result with automatic update on state change",
   "keywords": ["result","mana","promise","future","ui"],
@@ -14,7 +14,7 @@
     "hydro": "*"
   },
   "transpile": [["*.js", "!sourcegraph/babel->js", {"stage": 0}]],
-  "repository": "git://github.com/jkroso/mana-result.git",
+  "repository": "git://github.com/jkroso/mana-async.git",
   "author": "Jake Rosoman",
   "files": ["index.js"],
   "license": "MIT"

@@ -1,6 +1,6 @@
-# mana-result
+# mana-async
 
-It provides branching on result state and automatically transitions between states. The 3 possible states are:
+It provides branching on promise state and automatically transitions between states. The 3 possible states are:
 
   - `done`
   - `fail`
@@ -8,15 +8,17 @@ It provides branching on result state and automatically transitions between stat
 
 ## Installation
 
-`npm install mana-result`
+`npm install mana-async`
 
 then in your app:
 
 ```js
-import Result from 'mana-result'
+import Async from 'mana-async'
 
-<Result promise={http`/api/dump`}
-        pending={() => new Spinner}
-        done={({params}) => <pre>{JSON.stringify(params.promise.value)}</pre>}
-        fail={() => <span>error</span>}/>
+<Async promise={http`/api/dump`}
+       pending={self => self.previousNode}
+       fail={error => <span class="error-message">{error.message}</span>}
+       done={value => <pre>{JSON.stringify(value)}</pre>}/>
 ```
+
+The functions used in this example for the "fail" and "pending" states are identical to the defaults so if you are happy with their output you can leave those parameters undefined.
