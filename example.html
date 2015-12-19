@@ -20,30 +20,31 @@
       }
     </style>
     <script type="text/javascript">
-      import {pending,wrap} from 'result'
+      import {pending} from 'result'
       import {App,JSX} from 'mana'
       import State from './index'
 
       var count = 0
-      setInterval(() => {
-        app.cursor.value = pending()
-        setTimeout(() => {
-          if (Math.random() < 0.5)
-            app.cursor.value.error(++count)
-          else
-            app.cursor.value.write(++count)
-        }, 1e3)
-      }, 3e3)
 
-      const app = new App(wrap(count), cursor => {
-        const pending = self => <div class="loading">{self.previousNode || 'pending'}</div>
+      const app = new App(Promise.resolve(count), cursor => {
+        const pending = state => <div class="loading">{state.previousNode || 'pending'}</div>
         const done = value => <span class="done">{value}</span>
         const fail = value => <span class="error">{value}</span>
         return <State promise={cursor.value} pending done fail/>
       })
 
-      window.onload = () => app.mountIn(document.body)
+      window.onload = () => {
+        app.mountIn(document.body)
+        setInterval(() => {
+          app.cursor.value = pending()
+          setTimeout(() => {
+            if (Math.random() < 0.5)
+            app.cursor.value.error(++count)
+            else
+            app.cursor.value.write(++count)
+          }, 1e3)
+        }, 3e3)
+      }
     </script>
   </head>
-  <body></body>
 </html>

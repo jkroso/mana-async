@@ -1,8 +1,10 @@
 import {Component,STATE,JSX} from 'mana'
+import {coerce} from 'result'
 import assert from 'assert'
 
 export default class State extends Component {
   constructor(params, children) {
+    params.promise = coerce(params.promise)
     super(params, children)
     this.previousNode = undefined
     this[STATE] = params.promise.state

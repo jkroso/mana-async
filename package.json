@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "description": "render a result with automatic update on state change",
   "keywords": ["result","mana","promise","future","ui"],
-  "dependencies": {},
+  "dependencies": {
+    "result": ">=2.0.1"
+  },
   "devDependencies": {
     "serve": "jkroso/serve",
     "hydro-html": "*",
     "hydro-bdd": "*",
     "hydro-dot": "*",
-    "result": "2",
     "hydro": "*"
   },
   "transpile": [["*.js", "!sourcegraph/babel->js", {"stage": 0}]],
