@@ -4,19 +4,16 @@
     <meta charset="utf-8">
     <title>mana-async example</title>
     <style media="screen">
-      body {
-        margin: 0;
+      .container {
         font-family: sans-serif;
         font-size: 60pt;
+        width: 100px;
+        height: 100px;
         position: absolute;
-        left: calc(50% - 30pt);
-        top: calc(50% - 30pt);
-      }
-      .loading {
-        opacity: 0.2;
-      }
-      .error {
-        color: red;
+        left: calc(50% - 50px);
+        top: calc(50% - 50px);
+        vertical-align: middle;
+        text-align: center;
       }
     </style>
     <script type="text/javascript">
@@ -27,23 +24,26 @@
       var count = 0
 
       const app = new App(Promise.resolve(count), cursor => {
-        const pending = state => <div class="loading">{state.previousNode || 'pending'}</div>
         const done = value => <span class="done">{value}</span>
-        const fail = value => <span class="error">{value}</span>
-        return <Async promise={cursor.value} pending done fail/>
+        return <div class="container">
+          <Async promise={cursor.value} done/>
+        </div>
       })
+
+      const simHTTP = () => {
+        app.cursor.value = pending()
+        setTimeout(() => {
+          if (Math.random() < 0.5)
+            app.cursor.value.error(++count)
+          else
+            app.cursor.value.write(++count)
+        }, 1e3)
+      }
 
       window.onload = () => {
         app.mountIn(document.body)
-        setInterval(() => {
-          app.cursor.value = pending()
-          setTimeout(() => {
-            if (Math.random() < 0.5)
-            app.cursor.value.error(++count)
-            else
-            app.cursor.value.write(++count)
-          }, 1e3)
-        }, 3e3)
+        simHTTP()
+        setInterval(simHTTP, 3e3)
       }
     </script>
   </head>
